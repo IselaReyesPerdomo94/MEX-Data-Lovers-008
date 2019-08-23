@@ -21,32 +21,29 @@ const statisticsValue = (key, value, data) => {
     return items.length;
 };
 
-const sortData = (data, sortOrder) =>{
-    console.log(data);
-    // console.log(sortBy);
-    console.log(sortOrder);
-   return data.sort((a, b) => {
+const sortData = (data, sortOrder) => {
+    return data.sort((a, b) => {
         let nameA = a.name.toUpperCase();
         let nameB = b.name.toUpperCase();
-        if (sortOrder === 'a-z'){
-            if (nameA < nameB){
+        if (sortOrder === 'a-z') {
+            if (nameA < nameB) {
                 return -1;
-            }else if(nameA > nameB){
+            } else if (nameA > nameB) {
                 return 1;
-            }else {
-                return 0;           
+            } else {
+                return 0;
             }
-        }else{
-            if (nameA > nameB){
+        } else {
+            if (nameA > nameB) {
                 return -1;
-            }else if(nameA < nameB){
+            } else if (nameA < nameB) {
                 return 1;
-            }else {
-                return 0;           
+            } else {
+                return 0;
             }
         }
     });
-    
+
 };
 
 

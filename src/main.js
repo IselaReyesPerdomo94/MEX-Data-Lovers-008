@@ -80,9 +80,6 @@ const returnToIndex = () => {
 catalogButton.addEventListener('click', showCatalog);
 logo.addEventListener('click', returnToIndex);
 
-
-
-
 // Showing data
 const allData = document.getElementById('all-data'); //Section where data is going to appear
 
@@ -132,8 +129,6 @@ const showData = data => {
     counter.innerHTML = counterValue;
     allData.innerHTML = items;
 };
-
-
 
 //Working with filter button
 const getFilterValue = data => {
@@ -186,6 +181,5 @@ const getSpeciesValue = data => {
         allData.innerHTML = card.join(''); //Al cumplirse con la condición, ejecutar el siguiente código.
     }
 };
-
 
 window.addEventListener('load', main);
