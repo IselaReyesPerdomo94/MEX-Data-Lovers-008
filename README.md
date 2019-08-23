@@ -202,3 +202,5 @@ En conclusión, nuestro usuario promedio es un hombre mayor de edad (menor de 40
 
 
 Al notar lo que ofrece Get Schwifty a los nuevos fans de Rick and Morty y su fácil manejo de la información, la página es compartida con otros nuevos fanaticos de la serie.
+
+https://docs.google.com/presentation/d/1qSMHFdE7t2MhCOdNfeuWdWPTjp9vZKFuSyDcyF_6uyc/edit?usp=sharing
