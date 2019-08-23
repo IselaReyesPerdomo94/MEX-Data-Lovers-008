@@ -1,8 +1,60 @@
 //CONST
+const getData = async(url) => {
+    const response = await fetch(url);
+    return await response.json();
+};
+
+const dataApi = "./data/rickandmorty/rickandmorty.json";
+let newData = '';
+
+const main = async() => {
+    const fullData = await getData(dataApi);
+    showData(fullData.results);
+
+    //Carousel
+    const percentage = window.statisticsPercentage;
+    const value = window.statisticsValue;
+
+    const curiosities = [
+        `A lo largo de las 3 temporadas de Rick and Morty han aparecido múltiples versiones de los protagonistas, por ejemplo existen <b>${value('name', 'Rick', fullData.results)} Ricks</b> es decir el <b>${percentage('name', 'Rick', fullData.results)}%</b> de todos los personajes.`,
+        `Solo hay <b>${value('gender', 'Female', fullData.results)} mujeres</b> en toda la serie de Rick and Morty en contraste con <b> ${value('gender', 'Male', fullData.results)} de hombres</b>.<p>¡Solo el <b>${percentage('gender', 'Female', fullData.results)} %</b> son mujeres!</p>`,
+        `La especie que menos se repite en Rick and Morty es <b>Vampiro</b>, con solo <b>${value('species', 'Vampire', fullData.results)}</b> ejemplares en todo el universo y <b>Poopybutthole</b> le pisa los talones con <b>${value('species', 'Poopybutthole', fullData.results)}</b> ejemplares.`,
+        `Se desconoce el estatus de vida de <b>${value('status', 'unknown', fullData.results)}</b> personajes. <p>Lo equivalente al <b>${percentage('status', 'unknown', fullData.results)} %.</p></b>`,
+    ];
+
+    let changer = 0;
+    curiosity.innerHTML = curiosities[changer];
+
+    const next = () => {
+        changer++;
+        carousel();
+    };
+
+    const back = () => {
+        changer--;
+        carousel();
+    };
+
+    const carousel = () => {
+        if (changer > curiosities.length - 1) {
+            changer = 0;
+        } else if (changer < 0) {
+            changer = curiosities.length - 1;
+        }
+        curiosity.innerHTML = curiosities[changer];
+    };
+
+
+    nextButton.addEventListener('click', next);
+    backButton.addEventListener('click', back);
+
+    filterButton.addEventListener('change', () => getFilterValue(fullData.results));
+    orderButton.addEventListener('change', () => getOrdervalue(fullData.results));
+    speciesButton.addEventListener('change', () => getSpeciesValue(fullData.results));
+};
+
 const catalogButton = document.getElementById('catalog'); // catalog button
 const logo = document.getElementById('logo'); // logo element
-const data = window.RICKANDMORTY.results; // Call data R&M
-let newData = '';
 const filterButton = document.getElementById('filter'); //Filter options button
 const speciesButton = document.getElementById('species'); // Species options button
 const orderButton = document.getElementById('order'); //Order options button 
@@ -28,46 +80,12 @@ const returnToIndex = () => {
 catalogButton.addEventListener('click', showCatalog);
 logo.addEventListener('click', returnToIndex);
 
-//Carousel
-const percentage = window.statisticsPercentage;
-const value = window.statisticsValue;
 
-const curiosities = [
-    `A lo largo de las 3 temporadas de Rick and Morty han aparecido múltiples versiones de los protagonistas, por ejemplo existen <b>${value('name', 'Rick', data)} Ricks</b> es decir el <b>${percentage('name', 'Rick', data)}%</b> de todos los personajes.`,
-    `Solo hay <b>${value('gender', 'Female', data)} mujeres</b> en toda la serie de Rick and Morty en contraste con <b> ${value('gender', 'Male', data)} de hombres</b>.<p>¡Solo el <b>${percentage('gender', 'Female', data)} %</b> son mujeres!</p>`,
-    `La especie que menos se repite en Rick and Morty es <b>Vampiro</b>, con solo <b>${value('species', 'Vampire', data)}</b> ejemplares en todo el universo y <b>Poopybutthole</b> le pisa los talones con <b>${value('species', 'Poopybutthole', data)}</b> ejemplares.`,
-    `Se desconoce el estatus de vida de <b>${value('status', 'unknown', data)}</b> personajes. <p>Lo equivalente al <b>${percentage('status', 'unknown', data)} %.</p></b>`,
-];
-
-let changer = 0;
-curiosity.innerHTML = curiosities[changer];
-
-const next = () => {
-    changer++;
-    carousel();
-};
-
-const back = () => {
-    changer--;
-    carousel();
-};
-
-const carousel = () => {
-    if (changer > curiosities.length - 1) {
-        changer = 0;
-    } else if (changer < 0) {
-        changer = curiosities.length - 1;
-    }
-    curiosity.innerHTML = curiosities[changer];
-};
-
-
-nextButton.addEventListener('click', next);
-backButton.addEventListener('click', back);
 
 
 // Showing data
 const allData = document.getElementById('all-data'); //Section where data is going to appear
+
 const templateStringForCards = (element) => {
     return `<div class="flip-card">
     <div class="flip-card-inner">
@@ -102,8 +120,9 @@ const templateStringForCards = (element) => {
 </div>`;
 };
 
+
 //FUNCTION to show data
-const showData = () => {
+const showData = data => {
     let items = ''; //Variable vacía donde se imprimira cada elemento del data
     data.forEach(element => {
         items +=
@@ -114,10 +133,10 @@ const showData = () => {
     allData.innerHTML = items;
 };
 
-showData();
+
 
 //Working with filter button
-const getFilterValue = event => {
+const getFilterValue = data => {
     const filterValue = event.target.value; //Se guarda el valor de los option del html
     if (filterValue === 'all') {
         newData = data;
@@ -137,7 +156,7 @@ const getFilterValue = event => {
     //imprime el resultado dentro de la sección allData. .join concatena los elementos de un array.
 };
 
-const getOrdervalue = event => {
+const getOrdervalue = data => {
     const orderValue = event.target.value;
     const sort = newData !== '' ? newData : data;
     const result = window.sortData(sort, orderValue);
@@ -145,7 +164,7 @@ const getOrdervalue = event => {
     allData.innerHTML = card.join('');
 };
 
-const getSpeciesValue = event => {
+const getSpeciesValue = data => {
     const speciesValue = event.target.value; //Se guarda el valor de los option del html
     const dataType = newData !== '' ? newData : data;
 
@@ -165,9 +184,8 @@ const getSpeciesValue = event => {
         counter.innerHTML = counterValue;
         const card = result.map(element => templateStringForCards(element)); // result = array. .map itera items
         allData.innerHTML = card.join(''); //Al cumplirse con la condición, ejecutar el siguiente código.
-    };
-}
+    }
+};
 
-filterButton.addEventListener('change', getFilterValue);
-orderButton.addEventListener('change', getOrdervalue);
-speciesButton.addEventListener('change', getSpeciesValue);
+
+window.addEventListener('load', main);
