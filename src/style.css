@@ -155,6 +155,7 @@ header {
     border-radius: 15px;
 }
 
+
 /* .order-and-filter-button {
     justify-content: space-around;
     margin: 0 auto;
@@ -166,6 +167,7 @@ header {
     justify-content: space-around;
     cursor: pointer;
 }
+
 
 /* CAROUSEL */
 
@@ -255,17 +257,16 @@ header {
     cursor: pointer;
 }
 
-
- .data-card {
-    width: 45%; 
+.data-card {
+    width: 45%;
     margin: auto;
     align-items: center;
     border: #00B3CC 0.5rem;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 .flip-card {
-    width: 45%;
+    width: 90%;
     align-items: center;
     border: #00B3CC 0.5rem;
     background-color: transparent;
@@ -317,6 +318,7 @@ header {
 .info {
     max-width: 50%;
     text-align: center;
+    flex-wrap: wrap;
 }
 
 .icon {
@@ -341,7 +343,6 @@ header {
     font-weight: 600;
     color: rgb(38, 39, 39);
 }
-
 
 
 /*ID*/
@@ -370,13 +371,14 @@ header {
 #fiilter,
 #order {
     flex: wrap;
-    margin:0 1rem;
+    margin: 0 1rem;
 }
 
 h3 {
     margin: 0;
+    width: 80vw;
+    text-align: center;
 }
-
 
 option {
     background-color: white;
@@ -450,7 +452,6 @@ option {
     #facts p {
         font-size: 1.5rem;
     }
-
     .all-data {
         width: 1200px;
         height: 1000px;
