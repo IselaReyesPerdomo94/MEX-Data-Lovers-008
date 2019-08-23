@@ -149,16 +149,16 @@ describe('sortData', () => {
     it('is a function', () => {
         expect(typeof sortData).toBe('function');
     });
-    it('returns `Should return: Summer Smith, Rick Sanchez y Morty Smith as the firts three items from the array.`', () => {
-        expect(window.sortData(mock.results)[0].name).toBe('Beth Smith');
-        expect(window.sortData(mock.results)[1].name).toBe('Jerry Smith');
-        expect(window.sortData(mock.results)[2].name).toBe('Morty Smith');
+    it('returns `Should return: Beth Smith, Jerry Smith and Morty Smith as the first three items from the array.`', () => {
+        expect(window.sortData(mock.results, 'a-z')[0].name).toBe('Beth Smith');
+        expect(window.sortData(mock.results, 'a-z')[1].name).toBe('Jerry Smith');
+        expect(window.sortData(mock.results, 'a-z')[2].name).toBe('Morty Smith');
     });
 
-    it('returns `Should return: Beth Smith, Jerry Smith y Morty Smith as the firts three items from the array.`', () => {
-        expect(window.sortData(mock.results)[2].name).toBe('Beth Smith');
-        expect(window.sortData(mock.results)[1].name).toBe('Jerry Smith');
-        expect(window.sortData(mock.results)[0].name).toBe('Morty Smith');
+    it('returns `Should return: Summer Smith, Rick Sanchez and Morty Smith as the firts three items from the array.`', () => {
+        expect(window.sortData(mock.results, 'z-a')[0].name).toBe('Summer Smith');
+        expect(window.sortData(mock.results, 'z-a')[1].name).toBe('Rick Sanchez');
+        expect(window.sortData(mock.results, 'z-a')[2].name).toBe('Morty Smith');
     });
 });
 
